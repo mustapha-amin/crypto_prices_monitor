@@ -1,27 +1,42 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:countries_info/models/country_model.dart';
+import 'package:countries_info/models/trending_coins.dart';
 import 'package:http/http.dart';
 
-const apiKey = '654a02c281aecba07ca27907d3f63e35';
-const url = 'https://api.countrylayer.com/v2/all?access key = $apiKey';
+import '../consts.dart';
 
-/**
- * https://api.countrylayer.com/v2/all
-    ? access_key = API_KEY
- */
+const coinsListUrl =
+    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2Cethereum%2Ctron&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en';
+
+const trendingCoinsUrl = 'https://api.coingecko.com/api/v3/search/trending';
 
 class HttpService {
-  Future<List<CountryModel>> getCountries() async {
-    final response = await get(Uri.parse(url));
+  getCoinsData() async {
+    String url =
+        'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=';
+    for (var crypto in cryptos) {
+      cryptos.indexOf(crypto) != cryptos.length - 1
+          ? url += '$crypto%2C'
+          : url += crypto;
+    }
+    url +=
+        '&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en';
+    var response = await get(Uri.parse(coinsListUrl));
     if (response.statusCode == 200) {
-      var json = jsonDecode(response.body) as List<dynamic>;
-      List<CountryModel> countries =
-          json.map((e) => CountryModel.fromJson(e)).toList();
-      return countries;
+      log(response.body);
     } else {
-      throw Exception("Failed to fetch data");
+      log(response.body);
+    }
+  }
+
+  Future<TrendingCoins> getTrendingCoins() async {
+    var response = await get(Uri.parse(trendingCoinsUrl));
+    if (response.statusCode == 200) {
+      return TrendingCoins.fromJson(jsonDecode(response.body));
+    } else {
+      log(response.body);
+      throw ("An error occured");
     }
   }
 }
