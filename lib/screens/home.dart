@@ -1,69 +1,70 @@
+import 'package:countries_info/models/trending_coins.dart';
+import 'package:countries_info/screens/coins_list.dart';
 import 'package:flutter/material.dart';
-import 'package:countries_info/models/country_model.dart';
-import 'package:countries_info/service/http_service.dart';
-import 'package:shimmer/shimmer.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+import 'trending.dart';
+
+class Home extends StatefulWidget {
+  const Home({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<Home> createState() => _HomeState();
 }
 
-class _HomePageState extends State<HomePage> {
-  late Future<List<CountryModel>> countries;
-  @override
-  void initState() {
-    countries = HttpService().getCountries();
-    super.initState();
-  }
-
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(),
-      body: FutureBuilder(
-        future: countries,
-        builder:
-            (BuildContext context, AsyncSnapshot<List<CountryModel>> snapshot) {
-          if (snapshot.hasData) {
-            List<CountryModel> countries = snapshot.data!;
-            return ListView.builder(
-              itemCount: countries.length,
-              itemBuilder: (context, index) {
-                CountryModel country = countries[index];
-                return ListTile(
-                  title: Text(country.name),
-                );
-              },
-            );
-          } else if (snapshot.hasError) {
-            return const Center(
-              child: Text("Error"),
-            );
-          } else {
-            return ListView.builder(
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return Shimmer.fromColors(
-                  baseColor: Colors.grey[400]!,
-                  highlightColor: Colors.grey[100]!,
-                  child: ListTile(
-                    title: SizedBox(
-                      width: size.width / 2,
-                      height: size.height / 20,
-                    ),
-                    subtitle: SizedBox(
-                      width: size.width / 3,
-                      height: size.height / 25,
-                    ),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          actions: [
+            SizedBox(
+              width: size.width,
+              height: size.height / 15,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 15,
+                  vertical: 3,
+                ),
+                child: SearchBar(
+                  backgroundColor: MaterialStateColor.resolveWith(
+                    (states) => Colors.grey[800]!,
                   ),
-                );
-              },
-            );
-          }
-        },
+                  trailing: const [
+                    Icon(
+                      Icons.search,
+                      color: Colors.grey,
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
+          bottom: TabBar(
+            indicatorColor: Colors.amber[900],
+            indicatorSize: TabBarIndicatorSize.label,
+            labelColor: Colors.amber[900],
+            tabs: const [
+              Tab(
+                icon: Icon(Icons.money_rounded, color: Colors.white),
+                text: "Coins list",
+              ),
+              Tab(
+                icon: Icon(Icons.trending_up, color: Colors.white),
+                text: "Trending",
+              ),
+            ],
+          ),
+        ),
+        body: const TabBarView(
+          children: [
+            CoinsList(),
+            Trending(),
+          ],
+        ),
       ),
     );
   }
