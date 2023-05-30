@@ -1,4 +1,4 @@
-# countries_info
+# crypto_price_monitor
 
 A new Flutter project.
 

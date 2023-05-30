@@ -1,6 +1,6 @@
 {
-    "name": "countries_info",
-    "short_name": "countries_info",
+    "name": "crypto_price_monitor",
+    "short_name": "crypto_price_monitor",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

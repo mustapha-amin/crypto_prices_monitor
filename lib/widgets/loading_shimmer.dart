@@ -1,4 +1,4 @@
-import 'package:countries_info/widgets/shimmer_widget.dart';
+import 'package:crypto_price_monitor/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
 
 class LoadingShimmer extends StatefulWidget {
