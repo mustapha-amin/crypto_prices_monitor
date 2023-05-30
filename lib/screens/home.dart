@@ -1,5 +1,5 @@
-import 'package:crypto_price_monitor/models/trending_coins.dart';
-import 'package:crypto_price_monitor/screens/coins_list.dart';
+import 'package:crypto_prices_monitor/models/trending_coins.dart';
+import 'package:crypto_prices_monitor/screens/coins_list.dart';
 import 'package:flutter/material.dart';
 
 import 'trending.dart';

@@ -1,4 +1,8 @@
-# crypto_price_monitor
+<<<<<<< HEAD
+# crypto_prices_monitor
+=======
+# crypto_prices_monitor
+>>>>>>> 7158516e7f219ffa6ea783582ac01446bfe6e3f6
 
 A new Flutter project.
 

@@ -1,7 +1,7 @@
-import 'package:crypto_price_monitor/screens/coins_list.dart';
-import 'package:crypto_price_monitor/service/http_service.dart';
-import 'package:crypto_price_monitor/widgets/coins_widget.dart';
-import 'package:crypto_price_monitor/widgets/loading_shimmer.dart';
+import 'package:crypto_prices_monitor/screens/coins_list.dart';
+import 'package:crypto_prices_monitor/service/http_service.dart';
+import 'package:crypto_prices_monitor/widgets/coins_widget.dart';
+import 'package:crypto_prices_monitor/widgets/loading_shimmer.dart';
 import 'package:flutter/material.dart';
 
 import '../models/trending_coins.dart';

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:crypto_price_monitor/models/trending_coins.dart';
+import 'package:crypto_prices_monitor/models/trending_coins.dart';
 import 'package:http/http.dart';
 
 import '../consts.dart';

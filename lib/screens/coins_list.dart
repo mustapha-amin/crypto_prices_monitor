@@ -1,5 +1,5 @@
-import 'package:crypto_price_monitor/service/http_service.dart';
-import 'package:crypto_price_monitor/widgets/loading_shimmer.dart';
+import 'package:crypto_prices_monitor/service/http_service.dart';
+import 'package:crypto_prices_monitor/widgets/loading_shimmer.dart';
 import 'package:flutter/material.dart';
 
 class CoinsList extends StatefulWidget {

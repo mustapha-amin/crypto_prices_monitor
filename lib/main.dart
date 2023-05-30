@@ -1,7 +1,7 @@
-import 'package:crypto_price_monitor/screens/home.dart';
-import 'package:crypto_price_monitor/widgets/loading_shimmer.dart';
+import 'package:crypto_prices_monitor/screens/home.dart';
+import 'package:crypto_prices_monitor/widgets/loading_shimmer.dart';
 import 'package:flutter/material.dart';
-import 'package:crypto_price_monitor/screens/trending.dart';
+import 'package:crypto_prices_monitor/screens/trending.dart';
 
 void main() {
   runApp(MaterialApp(
