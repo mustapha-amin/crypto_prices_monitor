@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 List<String> cryptos = [
   'bitcoin',
   'ethereum',
@@ -20,3 +22,11 @@ List<String> cryptos = [
   'ethereum-classic',
   'filecoin',
 ];
+
+kTextStyle(double size, Color? color, [bool isBold = false]) {
+  return TextStyle(
+    color: color ?? Colors.white,
+    fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+    fontSize: size,
+  );
+}
