@@ -23,7 +23,7 @@ List<String> cryptos = [
   'filecoin',
 ];
 
-kTextStyle(double size, Color? color, [bool isBold = false]) {
+kTextStyle(double size, [Color? color, bool isBold = false]) {
   return TextStyle(
     color: color ?? Colors.white,
     fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
