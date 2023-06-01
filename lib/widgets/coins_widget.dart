@@ -40,7 +40,7 @@ class CoinsWidget extends StatelessWidget {
             style: const TextStyle(color: Colors.white),
           ),
           trailing: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
