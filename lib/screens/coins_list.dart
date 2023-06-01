@@ -1,3 +1,4 @@
+import 'package:crypto_prices_monitor/screens/coin_detail.dart';
 import 'package:crypto_prices_monitor/service/http_service.dart';
 import 'package:crypto_prices_monitor/widgets/loading_shimmer.dart';
 import 'package:flutter/material.dart';
@@ -39,8 +40,18 @@ class _CoinsListState extends State<CoinsList>
                       vertical: 2,
                       horizontal: 2,
                     ),
-                    child: CoinsWidget(
-                      coin: coins[index],
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return CoinDetail(
+                            coin: coins[index],
+                          );
+                        }));
+                      },
+                      child: CoinsWidget(
+                        coin: coins[index],
+                      ),
                     ),
                   );
                 },

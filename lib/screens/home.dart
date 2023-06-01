@@ -39,6 +39,9 @@ class _HomeState extends State<Home> {
                       color: Colors.grey,
                     )
                   ],
+                  onTap: () {
+                    
+                  },
                 ),
               ),
             ),
