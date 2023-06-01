@@ -14,12 +14,20 @@ class CoinsList extends StatefulWidget {
 
 class _CoinsListState extends State<CoinsList>
     with AutomaticKeepAliveClientMixin {
-  late Future<List<Coin>> coinslist;
+  late Future<List<Coin>>? coinslist;
 
   @override
   void initState() {
-    coinslist = HttpService.getCoinsData();
+    coinslist = HttpService.getCoinsData("default");
     super.initState();
+  }
+
+  Future<void> _refresh() async {
+    setState(() {
+      coinslist = null;
+    });
+    await Future.delayed(const Duration(seconds: 1));
+    coinslist = HttpService.getCoinsData("default");
   }
 
   @override
@@ -32,33 +40,37 @@ class _CoinsListState extends State<CoinsList>
             List<Coin> coins = snapshot.data!;
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-              child: ListView.builder(
-                itemCount: coins.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 2,
-                      horizontal: 2,
-                    ),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return CoinDetail(
-                            coin: coins[index],
-                          );
-                        }));
-                      },
-                      child: CoinsWidget(
-                        coin: coins[index],
+              child: RefreshIndicator(
+                color: Colors.orange[900],
+                onRefresh: _refresh,
+                child: ListView.builder(
+                  itemCount: coins.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 2,
+                        horizontal: 2,
                       ),
-                    ),
-                  );
-                },
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return CoinDetail(
+                              coin: coins[index],
+                            );
+                          }));
+                        },
+                        child: CoinsWidget(
+                          coin: coins[index],
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
             );
           }
-          return const LoadingShimmer();
+          return LoadingShimmer();
         },
       ),
     );

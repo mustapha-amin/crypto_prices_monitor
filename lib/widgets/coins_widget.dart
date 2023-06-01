@@ -1,5 +1,7 @@
+import 'package:crypto_prices_monitor/consts.dart';
 import 'package:crypto_prices_monitor/models/trending_coins.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../models/coin.dart';
 
@@ -28,12 +30,15 @@ class CoinsWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: ListTile(
-          leading: CircleAvatar(
-            backgroundImage: NetworkImage(coin.image!),
+          leading: Hero(
+            tag: coin.hashCode,
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(coin.image!),
+            ),
           ),
           title: Text(
             coin.name!,
-            style: const TextStyle(color: Colors.white),
+            style: kTextStyle(14),
           ),
           subtitle: Text(
             coin.symbol!,
@@ -45,7 +50,7 @@ class CoinsWidget extends StatelessWidget {
             children: [
               Text(
                 "${coin.priceChangePercentage24h}%",
-                style: TextStyle(
+                style: GoogleFonts.lato(
                   color: coin.priceChangePercentage24h.toString()[0] == '-'
                       ? Colors.red
                       : Colors.green,
@@ -54,7 +59,7 @@ class CoinsWidget extends StatelessWidget {
               ),
               Text(
                 "\$${coin.currentPrice}",
-                style: const TextStyle(color: Colors.white),
+                style: kTextStyle(12),
               ),
             ],
           ),

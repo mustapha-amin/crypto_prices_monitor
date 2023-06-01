@@ -27,9 +27,12 @@ class CoinDetail extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Image.network(
-                      coin!.image!,
-                      width: 10.w,
+                    Hero(
+                      tag: coin.hashCode,
+                      child: Image.network(
+                        coin!.image!,
+                        width: 10.w,
+                      ),
                     ),
                     const SizedBox(
                       width: 10,
@@ -65,6 +68,9 @@ class CoinDetail extends StatelessWidget {
                   fallbackHeight: 45.h,
                   gridLineLabelPrecision: 7,
                   data: coin!.sparklineIn7d!.map((e) => e.toDouble()).toList(),
+                ),
+                SizedBox(
+                  height: 10.sp,
                 ),
                 Column(
                   children: [

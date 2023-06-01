@@ -19,7 +19,7 @@ class Detail extends StatelessWidget {
         ),
         Text(
           value != null
-              ? (isMoney! ? value!.formatToMoney : value!.toString())
+              ? (isMoney! ? value!.formatToMoney : value!.formatToMoney.substring(1))
               : "Unavailable",
           style: kTextStyle(13),
         ),

@@ -57,7 +57,7 @@ class _TrendingState extends State<Trending>
               ),
             );
           }
-          return const LoadingShimmer();
+          return LoadingShimmer();
         },
       ),
     );

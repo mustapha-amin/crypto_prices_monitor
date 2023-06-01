@@ -5,21 +5,21 @@ import 'package:crypto_prices_monitor/models/trending_coins.dart';
 import 'package:http/http.dart';
 import '../consts.dart';
 
-const coinsListUrl =
-    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin&order=market_cap_desc&per_page=100&page=1&sparkline=true&locale=en';
-
 const trendingCoinsUrl = 'https://api.coingecko.com/api/v3/search/trending';
 
 class HttpService {
-  static Future<List<Coin>> getCoinsData() async {
+  static Future<List<Coin>> getCoinsData(String coin) async {
     String url =
         'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=';
-    for (var crypto in cryptos) {
-      crypto != cryptos.last ? url += '$crypto%2C' : url += crypto;
+    if (coin != "default") {
+      url += coin;
+    } else {
+      for (var crypto in cryptos) {
+        crypto != cryptos.last ? url += '$crypto%2C' : url += crypto;
+      }
     }
     url +=
         '&order=market_cap_desc&per_page=100&page=1&sparkline=true&locale=en';
-    print(url);
     var response = await get(Uri.parse(url));
     if (response.statusCode == 200) {
       log("successful");

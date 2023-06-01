@@ -1,5 +1,6 @@
 import 'package:crypto_prices_monitor/models/trending_coins.dart';
 import 'package:crypto_prices_monitor/screens/coins_list.dart';
+import 'package:crypto_prices_monitor/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'trending.dart';
@@ -21,27 +22,17 @@ class _HomeState extends State<Home> {
         appBar: AppBar(
           backgroundColor: Colors.black,
           actions: [
-            SizedBox(
-              width: size.width,
-              height: size.height / 15,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 15,
-                  vertical: 3,
-                ),
-                child: SearchBar(
-                  backgroundColor: MaterialStateColor.resolveWith(
-                    (states) => Colors.grey[800]!,
-                  ),
-                  trailing: const [
-                    Icon(
-                      Icons.search,
-                      color: Colors.grey,
-                    )
-                  ],
-                  onTap: () {
-                    
-                  },
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const SearchScreen();
+                  }));
+                },
+                icon: const Icon(
+                  Icons.search,
+                  color: Colors.white60,
                 ),
               ),
             ),
