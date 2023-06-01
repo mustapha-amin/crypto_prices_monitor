@@ -44,12 +44,13 @@ class _HomeState extends State<Home> {
             ),
           ],
           bottom: TabBar(
+            dividerColor: Colors.grey[600],
             indicatorColor: Colors.amber[900],
             indicatorSize: TabBarIndicatorSize.label,
             labelColor: Colors.amber[900],
             tabs: const [
               Tab(
-                icon: Icon(Icons.money_rounded, color: Colors.white),
+                icon: Icon(Icons.monetization_on, color: Colors.white),
                 text: "Coins list",
               ),
               Tab(

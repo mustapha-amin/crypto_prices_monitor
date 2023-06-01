@@ -1,41 +1,43 @@
 import 'dart:convert';
 import 'dart:developer';
-
+import 'package:crypto_prices_monitor/models/coin.dart';
 import 'package:crypto_prices_monitor/models/trending_coins.dart';
 import 'package:http/http.dart';
-
 import '../consts.dart';
 
 const coinsListUrl =
-    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2Cethereum%2Ctron&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en';
+    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin&order=market_cap_desc&per_page=100&page=1&sparkline=true&locale=en';
 
 const trendingCoinsUrl = 'https://api.coingecko.com/api/v3/search/trending';
 
 class HttpService {
-  getCoinsData() async {
+  static Future<List<Coin>> getCoinsData() async {
     String url =
         'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=';
     for (var crypto in cryptos) {
-      cryptos.indexOf(crypto) != cryptos.length - 1
-          ? url += '$crypto%2C'
-          : url += crypto;
+      crypto != cryptos.last ? url += '$crypto%2C' : url += crypto;
     }
     url +=
-        '&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en';
-    var response = await get(Uri.parse(coinsListUrl));
+        '&order=market_cap_desc&per_page=100&page=1&sparkline=true&locale=en';
+    print(url);
+    var response = await get(Uri.parse(url));
     if (response.statusCode == 200) {
-      log(response.body);
+      log("successful");
+      final coins = jsonDecode(response.body) as List<dynamic>;
+      log(coins.length.toString());
+      final coinsData = coins.map((e) => Coin.fromJson(e)).toList();
+      log(coinsData.length.toString());
+      return coinsData;
     } else {
-      log(response.body);
+      throw ("An error occured");
     }
   }
 
-  Future<TrendingCoins> getTrendingCoins() async {
+  static Future<TrendingCoins> getTrendingCoins() async {
     var response = await get(Uri.parse(trendingCoinsUrl));
     if (response.statusCode == 200) {
       return TrendingCoins.fromJson(jsonDecode(response.body));
     } else {
-      log(response.body);
       throw ("An error occured");
     }
   }

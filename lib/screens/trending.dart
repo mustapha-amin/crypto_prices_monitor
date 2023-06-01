@@ -1,6 +1,6 @@
 import 'package:crypto_prices_monitor/screens/coins_list.dart';
 import 'package:crypto_prices_monitor/service/http_service.dart';
-import 'package:crypto_prices_monitor/widgets/coins_widget.dart';
+import 'package:crypto_prices_monitor/widgets/trending_coins_widget.dart';
 import 'package:crypto_prices_monitor/widgets/loading_shimmer.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +20,7 @@ class _TrendingState extends State<Trending>
 
   @override
   void initState() {
-    coins = HttpService().getTrendingCoins();
+    coins = HttpService.getTrendingCoins();
     countryController = TextEditingController();
     super.initState();
   }
@@ -36,11 +36,11 @@ class _TrendingState extends State<Trending>
     return Scaffold(
       body: FutureBuilder(
         future: coins,
-        builder: (context, snapshot) {
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
-            List<CoinItem> coins = snapshot.data!.coins;
+            List<CoinItem> coins = snapshot.data.coins;
             return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 3),
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
               child: ListView.builder(
                 itemCount: coins.length,
                 itemBuilder: (context, index) {
@@ -49,7 +49,7 @@ class _TrendingState extends State<Trending>
                       vertical: 2,
                       horizontal: 2,
                     ),
-                    child: CoinWidget(
+                    child: TrendingCoinsWidget(
                       coin: coins[index],
                     ),
                   );

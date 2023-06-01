@@ -1,11 +1,9 @@
 import 'package:crypto_prices_monitor/models/trending_coins.dart';
 import 'package:flutter/material.dart';
 
-import '../models/coin.dart';
-
-class CoinsWidget extends StatelessWidget {
-  Coin coin;
-  CoinsWidget({required this.coin, super.key});
+class TrendingCoinsWidget extends StatelessWidget {
+  CoinItem coin;
+  TrendingCoinsWidget({required this.coin, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,34 +27,19 @@ class CoinsWidget extends StatelessWidget {
         ),
         child: ListTile(
           leading: CircleAvatar(
-            backgroundImage: NetworkImage(coin.image!),
+            backgroundImage: NetworkImage(coin.small),
           ),
           title: Text(
-            coin.name!,
+            coin.name,
             style: const TextStyle(color: Colors.white),
           ),
           subtitle: Text(
-            coin.symbol!,
+            coin.symbol,
             style: const TextStyle(color: Colors.white),
           ),
-          trailing: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "${coin.priceChangePercentage24h}%",
-                style: TextStyle(
-                  color: coin.priceChangePercentage24h.toString()[0] == '-'
-                      ? Colors.red
-                      : Colors.green,
-                  fontSize: 17,
-                ),
-              ),
-              Text(
-                "\$${coin.currentPrice}",
-                style: const TextStyle(color: Colors.white),
-              ),
-            ],
+          trailing: Text(
+            "${coin.priceBTC.toStringAsFixed(10)} btc",
+            style: const TextStyle(color: Colors.white, fontSize: 12),
           ),
         ),
       ),

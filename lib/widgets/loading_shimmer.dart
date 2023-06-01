@@ -12,49 +12,60 @@ class _LoadingShimmerState extends State<LoadingShimmer> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return ListView.builder(
-      itemCount: 10,
-      itemBuilder: (context, index) {
-        return Card(
-          color: Colors.grey[900],
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ShimmerWidget(
-                  height: size.height / 8,
-                  width: size.width / 10,
-                  shapeBorder: BoxShape.circle,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      child: ListView.builder(
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return SizedBox(
+            height: size.height / 9,
+            child: Card(
+              color: Colors.grey[900],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                child: SizedBox(
+                  height: size.height / 10,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ShimmerWidget(
+                        height: size.height / 8,
+                        width: size.width / 10,
+                        shapeBorder: BoxShape.circle,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ShimmerWidget(
+                            width: size.width / 3,
+                            height: 6,
+                            shapeBorder: BoxShape.rectangle,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          ShimmerWidget(
+                            width: size.width / 5,
+                            height: 4,
+                            shapeBorder: BoxShape.rectangle,
+                          ),
+                        ],
+                      ),
+                      ShimmerWidget(
+                        width: size.width / 3,
+                        height: 5,
+                        shapeBorder: BoxShape.rectangle,
+                      ),
+                    ],
+                  ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ShimmerWidget(
-                      width: size.width / 3,
-                      height: 6,
-                      shapeBorder: BoxShape.rectangle,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    ShimmerWidget(
-                      width: size.width / 5,
-                      height: 4,
-                      shapeBorder: BoxShape.rectangle,
-                    ),
-                  ],
-                ),
-                ShimmerWidget(
-                  width: size.width / 3,
-                  height: 5,
-                  shapeBorder: BoxShape.rectangle,
-                ),
-              ],
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
